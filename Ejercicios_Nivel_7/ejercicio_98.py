@@ -1,52 +1,43 @@
-#Ejercicio 98
+#Ejercicio 98 Ingresar 10 notas, clasificar aprobadas/reprobadas y mostrar estdisticas
 
-def leer_nota(mensaje):
-    while True:
-        try:
-            nota = float(input(mensaje))
-            if 0 <= nota <= 100:
-                return nota
-            print("La nota debe estar entre 0 y 100.")
-        except ValueError:
-            print("Entrada inválida. Ingresa un número.")
-
-
-class AnalisisNotas:
-    NOTA_APROBACION = 51
-
-    def __init__(self, cantidad=10):
-        self.cantidad = cantidad
+class Notas:
+    def __init__(self):
         self.aprobadas = 0
         self.reprobadas = 0
-        self.suma = 0.0
-        self.mayor = None
-        self.menor = None
+        self.suma = 0
+        self.mayor = 0
+        self.menor = 0
 
-    def leer_notas(self):
-        for i in range(1, self.cantidad + 1):
-            nota = leer_nota(f"Nota {i}: ")
-            self.suma += nota
+    def leer (self):
+        for i in range (10):
+            nota = float(input("Ingresa tu nota: "))
+            while nota < 0 or nota > 100:
+                print("La nota debe estar entre 0 y 100")
+                nota = float(input("Ingresa tu nota: "))
 
-            if nota >= self.NOTA_APROBACION:
-                self.aprobadas += 1
+            if nota >= 51:
+                self.aprobadas =self.aprobadas + 1
             else:
-                self.reprobadas += 1
+                self.reprobadas =self.reprobadas + 1
 
-            if self.mayor is None or nota > self.mayor:
+            if i == 0:
                 self.mayor = nota
-            if self.menor is None or nota < self.menor:
                 self.menor = nota
+            else:
+                if nota > self.mayor:
+                    self.mayor = nota
+                if nota < self.menor:
+                    self.menor = nota
 
-    def mostrar_estadisticas(self):
-        print("\n--- ESTADÍSTICAS ---")
-        print(f"Aprobadas: {self.aprobadas}")
-        print(f"Reprobadas: {self.reprobadas}")
-        print(f"Promedio: {self.suma / self.cantidad:.2f}")
-        print(f"Nota mayor: {self.mayor}")
-        print(f"Nota menor: {self.menor}")
+            self.suma = self.suma + nota
 
+    def mostrar(self):
+        print("Tienes:", self.aprobadas, "notas aprobadas")
+        print("Tienes:", self.reprobadas, "notas reprobadas")
+        print("Tu promedio es:", self.suma/10)
+        print("Tu nota mas alta es:", self.mayor)
+        print("Tu nota mas baja es:", self.menor)
 
-if __name__ == "__main__":
-    analisis = AnalisisNotas()
-    analisis.leer_notas()
-    analisis.mostrar_estadisticas()
+inicio = Notas()
+inicio.leer()
+inicio.mostrar()

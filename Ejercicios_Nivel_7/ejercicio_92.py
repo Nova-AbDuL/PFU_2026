@@ -1,71 +1,46 @@
-#Ejercicio 92
-
-def leer_positivo(mensaje):
-    while True:
-        try:
-            valor = float(input(mensaje))
-            if valor > 0:
-                return valor
-            print("El valor debe ser mayor que 0.")
-        except ValueError:
-            print("Entrada inválida. Ingresa un número.")
-
+#Ejercicio 92 Crear un menu con figuras geometricas y permitir calcular areas repetidamente
 
 class Figuras:
-    PI = 3.14159265359
+    def area_circulo(self, radio):
+        return 3.14159 * radio ** 2
 
-    @staticmethod
-    def area_circulo(radio):
-        return Figuras.PI * radio ** 2
-
-    @staticmethod
-    def area_rectangulo(base, altura):
+    def area_rectangulo(self, base, altura):
         return base * altura
 
-    @staticmethod
-    def area_triangulo(base, altura):
+    def area_triangulo(self, base, altura):
         return (base * altura) / 2
 
-    @staticmethod
-    def area_cuadrado(lado):
+    def area_cuadrado(self, lado):
         return lado ** 2
 
+figuras = Figuras()
+opcion = 0
 
-class Menu:
-    def mostrar(self):
-        print("\n--- ÁREAS DE FIGURAS ---")
-        print("1. Círculo")
-        print("2. Rectángulo")
-        print("3. Triángulo")
-        print("4. Cuadrado")
-        print("5. Salir")
+while opcion != 5:
+    print("Selecciona una figura para calcular su área:")
+    print("1. Círculo")
+    print("2. Rectángulo")
+    print("3. Triángulo")
+    print("4. Cuadrado")
+    print("5. Salir")
+    opcion = int(input("Ingrese su opción (1-5): "))
 
-    def ejecutar(self):
-        opcion = ""
-        while opcion != "5":  # Repetir
-            self.mostrar()
-            opcion = input("Elige una opción: ").strip()
-
-            match opcion:  # Según
-                case "1":
-                    radio = leer_positivo("Radio: ")
-                    print(f"Área: {Figuras.area_circulo(radio):.2f}")
-                case "2":
-                    base = leer_positivo("Base: ")
-                    altura = leer_positivo("Altura: ")
-                    print(f"Área: {Figuras.area_rectangulo(base, altura):.2f}")
-                case "3":
-                    base = leer_positivo("Base: ")
-                    altura = leer_positivo("Altura: ")
-                    print(f"Área: {Figuras.area_triangulo(base, altura):.2f}")
-                case "4":
-                    lado = leer_positivo("Lado: ")
-                    print(f"Área: {Figuras.area_cuadrado(lado):.2f}")
-                case "5":
-                    print("¡Hasta luego!")
-                case _:
-                    print("Opción inválida.")
-
-
-if __name__ == "__main__":
-    Menu().ejecutar()
+    match opcion:
+        case 1:
+            radio = float(input("Ingrese el radio del círculo: "))
+            print("El área del círculo es: ", figuras.area_circulo(radio))
+        case 2:
+            base = float(input("Ingrese la base del rectángulo: "))
+            altura = float(input("Ingrese la altura del rectángulo: "))
+            print("El área del rectángulo es: ", figuras.area_rectangulo(base, altura))
+        case 3:
+            base = float(input("Ingrese la base del triángulo: "))
+            altura = float(input("Ingrese la altura del triángulo: "))
+            print("El área del triángulo es: ", figuras.area_triangulo(base, altura))
+        case 4:
+            lado = float(input("Ingrese el lado del cuadrado: "))
+            print("El área del cuadrado es: ", figuras.area_cuadrado(lado))
+        case 5:
+            print("Saliendo del programa.")
+        case _:
+            print("Opción inválida. Por favor, seleccione una opción válida.")

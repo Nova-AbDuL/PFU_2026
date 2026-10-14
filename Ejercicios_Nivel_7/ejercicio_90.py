@@ -1,34 +1,16 @@
-#Ejercicio 90
+#Ejercicio 90 Mostrar la tabla de multiplicar de un numero y permite repetir el proceso para diferentes numeros
 
-def leer_entero(mensaje):
-    while True:
-        try:
-            return int(input(mensaje))
-        except ValueError:
-            print("Entrada inválida. Ingresa un número entero.")
-
-
-class TablaMultiplicar:
-    def __init__(self, numero, limite=10):
+class tabla:
+    def __init__(self, numero):
         self.numero = numero
-        self.limite = limite
 
     def mostrar(self):
-        print(f"\nTabla del {self.numero}")
-        for i in range(1, self.limite + 1):
-            print(f"{self.numero} x {i} = {self.numero * i}")
+        for i in range(1, 11):
+            print(self.numero, "x", i, "=", self.numero * i)
 
-
-class Programa:
-    def ejecutar(self):
-        while True:  # Repetir
-            numero = leer_entero("Ingresa un número: ")
-            TablaMultiplicar(numero).mostrar()
-            respuesta = input("\n¿Deseas ver otra tabla? (s/n): ").strip().lower()
-            if respuesta != "s":
-                break
-        print("¡Hasta luego!")
-
-
-if __name__ == "__main__":
-    Programa().ejecutar()
+respuesta = "s"
+while respuesta =="s":
+    numero = int(input("Ingresa un numero para mostrar su tabla de multiplicar: "))
+    inicio = tabla(numero)
+    inicio.mostrar()
+    respuesta = input("Quieres ver otra tabla wacho? (s/n): ")

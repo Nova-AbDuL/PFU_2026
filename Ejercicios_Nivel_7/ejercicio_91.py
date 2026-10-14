@@ -1,12 +1,4 @@
-#Ejercicio 91
-
-def leer_numero(mensaje):
-    while True:
-        try:
-            return float(input(mensaje))
-        except ValueError:
-            print("Entrada inválida. Ingresa un número.")
-
+#Ejercicio 91 Crear calculador que permita realizar operaciones hasta seleccionar salir 
 
 class Calculadora:
     def sumar(self, a, b):
@@ -19,51 +11,37 @@ class Calculadora:
         return a * b
 
     def dividir(self, a, b):
-        if b == 0:
-            return None
         return a / b
 
+calculadora = Calculadora()
+opcion = 0
 
-class Menu:
-    def __init__(self):
-        self.calculadora = Calculadora()
+while opcion != 5:
+    print("Selecciona una operación:")
+    print("1. Sumar")
+    print("2. Restar")
+    print("3. Multiplicar")
+    print("4. Dividir")
+    print("5. Salir")
+    opcion = int(input("Ingrese su opción (1-5): "))
 
-    def mostrar(self):
-        print("\n--- CALCULADORA ---")
-        print("1. Sumar")
-        print("2. Restar")
-        print("3. Multiplicar")
-        print("4. Dividir")
-        print("5. Salir")
+    if opcion >= 1 and opcion <= 4:
+        a = float(input("Ingrese el primer número: "))
+        b = float(input("Ingrese el segundo número: "))
 
-    def ejecutar(self):
-        opcion = ""
-        while opcion != "5":  # Repetir
-            self.mostrar()
-            opcion = input("Elige una opción: ").strip()
-
-            match opcion:  # Según
-                case "1" | "2" | "3" | "4":
-                    a = leer_numero("Primer número: ")
-                    b = leer_numero("Segundo número: ")
-                    match opcion:
-                        case "1":
-                            resultado = self.calculadora.sumar(a, b)
-                        case "2":
-                            resultado = self.calculadora.restar(a, b)
-                        case "3":
-                            resultado = self.calculadora.multiplicar(a, b)
-                        case "4":
-                            resultado = self.calculadora.dividir(a, b)
-                    if resultado is None:
-                        print("Error: no se puede dividir entre cero.")
-                    else:
-                        print(f"Resultado: {resultado}")
-                case "5":
-                    print("¡Hasta luego!")
-                case _:
-                    print("Opción inválida.")
-
-
-if __name__ == "__main__":
-    Menu().ejecutar()
+        match opcion:
+            case 1:
+                print("La suma es: ", calculadora.sumar(a, b))
+            case 2:
+                print("La resta es: ", calculadora.restar(a, b))
+            case 3:
+                print("La multiplicación es: ", calculadora.multiplicar(a, b))
+            case 4:
+                if b == 0:
+                    print("No se puede dividir entre cero.")
+                else:
+                    print("La división es: ", calculadora.dividir(a, b))
+    elif opcion == 5:
+        print("Saliendo de la calculadora.")
+    else:
+        print("Opción inválida. Por favor, seleccione una opción válida.")

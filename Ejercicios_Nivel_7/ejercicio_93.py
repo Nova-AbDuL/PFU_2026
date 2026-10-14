@@ -1,50 +1,35 @@
-#Ejercicio 93
+#Ejercicio 93 Solicitar notas de estudiantes hasta finalizar y calcular promedio mayor y menor
 
-def leer_numero(mensaje):
-    while True:
-        try:
-            return float(input(mensaje))
-        except ValueError:
-            print("Entrada inválida. Ingresa un número.")
-
-
-class RegistroNotas:
-    CENTINELA = -1
-
+class Notas:
     def __init__(self):
-        self.suma = 0.0
+        self.suma = 0
         self.cantidad = 0
-        self.mayor = None
-        self.menor = None
+        self.mayor = 0
+        self.menor = 0
 
-    def agregar(self, nota):
-        self.suma += nota
-        self.cantidad += 1
-        if self.mayor is None or nota > self.mayor:
-            self.mayor = nota
-        if self.menor is None or nota < self.menor:
-            self.menor = nota
-
-    def leer_notas(self):
-        nota = leer_numero("Nota (0-100, -1 para finalizar): ")
-        while nota != self.CENTINELA:
-            if 0 <= nota <= 100:
-                self.agregar(nota)
+    def leer(self):
+        nota = float(input("Ingrese la nota del estudiante (o -1 para finalizar): "))
+        while nota != -1:
+            if self.cantidad == 0:
+                self.mayor = nota
+                self.menor = nota
             else:
-                print("La nota debe estar entre 0 y 100.")
-            nota = leer_numero("Nota (0-100, -1 para finalizar): ")
+                if nota > self.mayor:
+                    self.mayor = nota
+                if nota < self.menor:
+                    self.menor = nota
+            self.suma = self.suma + nota
+            self.cantidad = self.cantidad + 1
+            nota = float(input("Ingrese la nota del estudiante (o -1 para finalizar): "))
 
-    def mostrar_resultado(self):
-        if self.cantidad == 0:
-            print("\nNo se ingresaron notas.")
-            return
-        print(f"\nCantidad de notas: {self.cantidad}")
-        print(f"Promedio: {self.suma / self.cantidad:.2f}")
-        print(f"Nota mayor: {self.mayor}")
-        print(f"Nota menor: {self.menor}")
+    def mostrar(self):
+        if self.cantidad > 0:
+            print("Promedio de notas: ", self.suma / self.cantidad)
+            print("Nota mayor: ", self.mayor)
+            print("Nota menor: ", self.menor)
+        else:
+            print("No se ingresaron notas.")
 
-
-if __name__ == "__main__":
-    registro = RegistroNotas()
-    registro.leer_notas()
-    registro.mostrar_resultado()
+inicio = Notas()
+inicio.leer()
+inicio.mostrar()

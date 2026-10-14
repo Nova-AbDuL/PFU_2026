@@ -1,56 +1,35 @@
-#Ejericicio 99
+#Ejericicio 99 Leer N edades y determinar cuantas correspondes a niños, adolecentes, adultos y adultos mayores
 
-def leer_entero_positivo(mensaje):
-    while True:
-        try:
-            valor = int(input(mensaje))
-            if valor > 0:
-                return valor
-            print("Debe ser mayor que 0.")
-        except ValueError:
-            print("Entrada inválida. Ingresa un número entero.")
-
-
-def leer_edad(mensaje):
-    while True:
-        try:
-            edad = int(input(mensaje))
-            if edad >= 0:
-                return edad
-            print("La edad no puede ser negativa.")
-        except ValueError:
-            print("Entrada inválida. Ingresa un número entero.")
-
-
-class ClasificadorEdades:
+class Edades:
     def __init__(self, n):
         self.n = n
-        self.ninos = 0          # 0 - 11
-        self.adolescentes = 0   # 12 - 17
-        self.adultos = 0        # 18 - 59
-        self.adultos_mayores = 0  # 60+
-
-    def leer_edades(self):
-        for i in range(1, self.n + 1):
-            edad = leer_edad(f"Edad {i}: ")
-            if edad <= 11:
-                self.ninos += 1
-            elif edad <= 17:
-                self.adolescentes += 1
+        self.ninos = 0
+        self.adolescentes = 0
+        self.adultos = 0
+        self.adultos_mayores = 0
+    
+    def leer(self):
+        for i in range(self.n):
+            edad = int(input("Ingresa la edad: "))
+            while edad < 1 or edad > 98:
+                print("La edad debe estar entre 1 y 98")
+                edad = int(input("Ingresa la edad: "))
+            if edad<= 11:
+                self.ninos = self.ninos + 1
+            elif edad <=17:
+                self.adolescentes = self.adolescentes + 1
             elif edad <= 59:
-                self.adultos += 1
+                self.adultos = self.adultos + 1
             else:
-                self.adultos_mayores += 1
+                self.adultos_mayores = self.adultos_mayores + 1
 
-    def mostrar_resultado(self):
-        print(f"\nNiños (0-11): {self.ninos}")
-        print(f"Adolescentes (12-17): {self.adolescentes}")
-        print(f"Adultos (18-59): {self.adultos}")
-        print(f"Adultos mayores (60+): {self.adultos_mayores}")
+    def mostrar(self):
+        print("Cantidad de niños: ", self.ninos)
+        print("Cantidad de adolescentes: ", self.adolescentes)
+        print("Cantidad de adultos: ", self.adultos)
+        print("Cantidad de adultos mayores: ", self.adultos_mayores)
 
-
-if __name__ == "__main__":
-    n = leer_entero_positivo("¿Cuántas edades deseas ingresar? ")
-    clasificador = ClasificadorEdades(n)
-    clasificador.leer_edades()
-    clasificador.mostrar_resultado()
+n = int(input("Ingresa la cantidad de edades que vas a ingresar: "))
+inicio = Edades(n)
+inicio.leer()
+inicio.mostrar()

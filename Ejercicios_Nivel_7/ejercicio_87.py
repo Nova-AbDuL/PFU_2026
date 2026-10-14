@@ -1,23 +1,14 @@
-#Ejercicio 87
+#Ejercicio 87 leer 10 numeros y determinar el mayor y menor
 
-def leer_numero(mensaje):
-    while True:
-        try:
-            return float(input(mensaje))
-        except ValueError:
-            print("Entrada inválida. Ingresa un número.")
+class Numeros:
+    def __init__(self):
+        self.mayor = 0
+        self.menor = 0
 
-
-class MayorMenor:
-    def __init__(self, cantidad=10):
-        self.cantidad = cantidad
-        self.mayor = None
-        self.menor = None
-
-    def leer_numeros(self):
-        for i in range(1, self.cantidad + 1):
-            numero = leer_numero(f"Número {i}: ")
-            if self.mayor is None:
+    def leer(self):
+        for i in range(10):
+            numero = int(input("Ingresa un numero: "))
+            if i == 0:
                 self.mayor = numero
                 self.menor = numero
             else:
@@ -26,12 +17,10 @@ class MayorMenor:
                 if numero < self.menor:
                     self.menor = numero
 
-    def mostrar_resultado(self):
-        print(f"\nMayor: {self.mayor}")
-        print(f"Menor: {self.menor}")
+    def mostrar(self):
+        print("El numero mayor es:", self.mayor)
+        print("El numero menor es:", self.menor)
 
-
-if __name__ == "__main__":
-    app = MayorMenor()
-    app.leer_numeros()
-    app.mostrar_resultado()
+inicio = Numeros()
+inicio.leer()
+inicio.mostrar()
